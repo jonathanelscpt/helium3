@@ -17,6 +17,7 @@ Because Helium is simply a wrapper around Selenium, you can freely mix the two
 libraries. For example:
 
 ```python
+from helium3 import start_chrome
 # A Helium function:
 driver = start_chrome()
 # A Selenium API:
@@ -41,15 +42,16 @@ traditionally painful in Selenium:
 - **Explicit waits.** Helium gives you a much nicer API for waiting for a
   condition on the web page to become true. For example: To wait for an element
   to appear in Selenium, you would write:
-  ```python
-  element = WebDriverWait(driver, 10).until(
-      EC.presence_of_element_located((By.ID, "myDynamicElement"))
-  )
-  ```
+```python
+element = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.ID, "myDynamicElement"))
+)
+```
   With Helium, you can write:
-  ```python
-  wait_until(Button('Download').exists)
-  ```
+```python
+from helium3 import *
+wait_until(Button('Download').exists)
+ ```
 
 ## Installation
 
@@ -58,7 +60,7 @@ To get started with Helium, you need Python 3 and Chrome or Firefox.
 If you already know Python, then the following command should be all you need:
 
 ```bash
-pip install helium
+pip install helium3
 ```
 
 Otherwise - Hi! I would recommend you create a virtual environment in the

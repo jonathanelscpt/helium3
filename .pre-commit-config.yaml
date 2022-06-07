@@ -1,0 +1,33 @@
+exclude: ^(\.tox|ci/templates|\.bumpversion\.cfg)(/|$)
+repos:
+  - repo: 'https://github.com/pre-commit/pre-commit-hooks'
+    rev: v4.2.0
+    hooks:
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-yaml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: fix-encoding-pragma
+      - id: mixed-line-ending
+      - id: check-docstring-first
+      - id: debug-statements
+  - repo: 'https://github.com/timothycrosley/isort'
+    rev: 5.10.1
+    hooks:
+      - id: isort
+#  - repo: 'https://github.com/psf/black'
+#    rev: 22.3.0
+#    hooks:
+#      - id: black
+#  - repo: 'https://gitlab.com/pycqa/flake8'
+#    rev: 3.9.2
+#    hooks:
+#      - id: flake8

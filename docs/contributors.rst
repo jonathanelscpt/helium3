@@ -6,4 +6,3 @@ Contributors to this project
 
 - `mherrmann <https://github.com/mherrmann>`_ (**Michael Herrmann**) - *Project creator and maintainer*
 - `IgnisDa <https://github.com/IgnisDa>`_ (**Diptesh Choudhuri**) - *Documentation maintainer*
-

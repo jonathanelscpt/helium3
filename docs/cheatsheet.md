@@ -8,7 +8,7 @@ All of Helium's public functions lie directly in the module `helium`.
 You can for instance import them as follows:
 
 ```python
-from helium import *
+from helium3 import *
 ```
 
 ## Starting a browser
@@ -17,6 +17,7 @@ Helium currently supports Chrome and Firefox. You can start them with the
 following functions:
 
 ```python
+from helium3 import *
 start_chrome()
 start_firefox()
 ```
@@ -30,6 +31,7 @@ This is useful for developing your scripts. However, once you run them, you may
 not want this window to appear. You can achieve this by adding `headless=True`:
 
 ```python
+from helium3 import *
 start_chrome(headless=True)
 start_chrome('google.com', headless=True)
 ```
@@ -41,7 +43,8 @@ start_chrome('google.com', headless=True)
 The following example shows the most typical statements in a Helium script:
 
 ```python
-from helium import *
+from helium3 import *
+
 start_chrome('google.com')
 write('helium selenium github')
 press(ENTER)
@@ -61,17 +64,18 @@ The above example used pure strings such as `Sign in` to identify elements on
 the web page. But Helium also lets you target elements more specifically.
 For instance:
 
- * [`Link('Sign in')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L643)
- * [`Button('Sign in')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L706)
- * [`TextField('First name')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L768)
- * [`CheckBox('I accept')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L867)
- * [`RadioButton('Windows')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L907)
- * [`Image(alt='Helium logo')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L739)
+* [`Link('Sign in')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L643)
+* [`Button('Sign in')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L706)
+* [`TextField('First name')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L768)
+* [`CheckBox('I accept')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L867)
+* [`RadioButton('Windows')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L907)
+* [`Image(alt='Helium logo')`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L739)
 
 You can pass them into other functions such as `click(Link('Sign in'))`.
 But you can also use them to _read_ data from the web site. For instance:
 
 ```python
+from helium3 import *
 print(TextField('First name').value)
 ```
 
@@ -79,6 +83,7 @@ A common use case is to use `.exists()` to check for the existence of an
 element. For example:
 
 ```python
+from helium3 import *
 if Text('Accept cookies?').exists():
     click('I accept')
 ```
@@ -86,11 +91,13 @@ if Text('Accept cookies?').exists():
 I also often find `Text(...).value` useful for reading out data:
 
 ```python
+from helium3 import *
 name = Text(to_right_of='Name:', below=Image(alt='Profile picture')).value
 ```
 
 For a full list of element types and their properties, please see
-[the source code](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L470-L1008).
+[the source code](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L470-L1008)
+.
 
 ## Finding elements relative to others
 
@@ -99,6 +106,7 @@ let you find elements relative to other elements. You can similarly use
 `below=...` and `to_left_of`. Here are some more examples.
 
 ```python
+from helium3 import *
 Text(above='Balance', below='Transactions').value
 Link(to_right_of='Invoice:')
 Image(to_right_of=Link('Sign in', below=Text('Navigation')))
@@ -111,12 +119,14 @@ Use
 to wait for a condition to become true. For example:
 
 ```python
+from helium3 import *
 wait_until(Button('Download').exists)
 ```
 
 But you can also use this to wait for an arbitrary condition:
 
 ```python
+from helium3 import *
 wait_until(lambda: TextField('Balance').value == '$2M')
 ```
 
@@ -146,6 +156,7 @@ function calls. Because of this, you can freely mix Selenium and Helium. For
 example:
 
 ```python
+from helium3 import *
 # A Helium function:
 driver = start_chrome()
 # A Selenium API:
@@ -155,7 +166,8 @@ driver.execute_script("alert('Hi!');")
 You can also get / set the Selenium WebDriver which Helium uses via
 [`get_driver()`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L104)
 and
-[`set_driver(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L97).
+[`set_driver(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L97)
+.
 
 With the WebDriver instance, you can execute any Selenium commands you want.
 
@@ -169,16 +181,17 @@ Link('Helium').web_element.get_attribute('class')
 
 Here, `.get_attribute(...)` is a Selenium API.
 
-
 ## Finding all elements
 
 The `.web_element` property and the `S(...)` predicate are particularly useful
 for extracting multiple pieces of data from a web page. To do this, you can use
-Helium's [`find_all(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L281) function.
+Helium's [`find_all(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L281)
+function.
 As its name implies, it lets you find all occurrences of an element on a page.
 For example:
 
 ```python
+from helium3 import *
 email_cells = find_all(S("table > tr > td", below="Email"))
 emails = [cell.web_element.text for cell in email_cells]
 ```
@@ -192,6 +205,7 @@ via the
 [`Config` class](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L437):
 
 ```python
+from helium3 import *
 Config.implicit_wait_secs = 30
 ```
 
@@ -209,11 +223,16 @@ message shown, or `write(..., into=Alert())` to enter a value.
 ## File uploads, drag and drop, combo boxes, popups
 
 Use
-[`attach_file(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L388),
-[`drag_file(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L375),
-[`drag(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L252),
-[`select(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L362),
-[`switch_to(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L1057).
+[`attach_file(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L388)
+,
+[`drag_file(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L375)
+,
+[`drag(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L252)
+,
+[`select(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L362)
+,
+[`switch_to(...)`](https://github.com/mherrmann/helium/blob/0667ddb9be531367a0d707ad8f5fcfb75c528521/helium/__init__.py#L1057)
+.
 
 ## Clicking at x, y coordinates
 
@@ -227,6 +246,7 @@ for how.
 Use Selenium's API:
 
 ```python
+from helium3 import *
 get_driver().save_screenshot(r'C:\screenshot.png')
 ```
 

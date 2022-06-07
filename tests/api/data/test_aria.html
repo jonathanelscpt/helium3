@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Test page for browser system tests</title>
-        <style>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Test page for browser system tests</title>
+    <style>
 
-        </style>
-	</head>
+    </style>
+</head>
 <body>
-	<form>
-		<button aria-label="Close">X</button>
-	</form>
-	<form>
-		<button aria-label="Disabled Close" aria-disabled="true">X</button>
-	</form>
-	<div role="button" aria-label="Attach files" aria-disabled="false" style="display: block; width: 20px; height: 20px; background-color: green;"></div>
-	<div role="button" aria-label="Disabled Attach files" aria-disabled="true" style="display: block; width: 20px; height: 20px; background-color: red;"></div>
-	<form>
-		<input type="submit" value="" aria-label="Submit" />
-	</form>
-	<table>
-		<tr>
-			<td><div id="TextboxLabel">Textbox:</div></td>
-			<td>
-				<div role="textbox" aria-labelledby="TextboxLabel">
-					Textbox value
-				</div>
-			</td>
-		</tr>
-	</table>
+<form>
+    <button aria-label="Close">X</button>
+</form>
+<form>
+    <button aria-disabled="true" aria-label="Disabled Close">X</button>
+</form>
+<div aria-disabled="false" aria-label="Attach files" role="button"
+     style="display: block; width: 20px; height: 20px; background-color: green;"></div>
+<div aria-disabled="true" aria-label="Disabled Attach files" role="button"
+     style="display: block; width: 20px; height: 20px; background-color: red;"></div>
+<form>
+    <input aria-label="Submit" type="submit" value=""/>
+</form>
+<table>
+    <tr>
+        <td>
+            <div id="TextboxLabel">Textbox:</div>
+        </td>
+        <td>
+            <div aria-labelledby="TextboxLabel" role="textbox">
+                Textbox value
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
