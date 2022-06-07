@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "helium3"
+version = "0.1.0"
+description = "Lighter browser automation based on Selenium."
+authors = ["Jonathan Els <jonathanelscpt@gmail.com>"]
+maintainers = ["Jonathan Els <jonathanelscpt@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "helium3", from = "src" }]
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Topic :: Software Development :: Testing',
+    'Topic :: Software Development :: Libraries',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS :: MacOS X'
+]
+keywords = ['helium3', 'selenium', 'browser', 'automation']
+repository = 'https://github.com/jonathanelscpt/helium3'
+homepage = 'https://github.com/jonathanelscpt/helium3'
+
+[tool.poetry.dependencies]
+python = "^3.8"
+selenium = "3.141.0"
+
+[tool.poetry.group.dev.dependencies]
+psutil = "^5.9.1"
+pywin32 = { version = "^304", markers = "platform_system == 'Windows'" }
+pre-commit = "^2.19.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.1.2"
+
+[tool.poetry.group.docs.dependencies]
+sphinx-rtd-theme = "^0.5"
+sphinx = "^3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
