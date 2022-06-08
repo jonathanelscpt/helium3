@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from unittest import TestCase
 
-from helium3._impl.util.xpath import predicate_or
+from helium3.utils.xpath import predicate_or
 
 
 class PredicateOrTest(TestCase):

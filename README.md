@@ -83,7 +83,7 @@ call venv\scripts\activate.bat
 Then, install Helium using `pip`:
 
 ```bash
-python -m pip install helium
+python -m pip install helium3
 ```
 
 Now enter `python` into the command prompt and (for instance) the commands in

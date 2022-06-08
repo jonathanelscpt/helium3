@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 from re import search
 
-from helium3 import Button, Point, click, doubleclick, drag, hover, rightclick
-from tests.api import BrowserAT, test_browser_name
+from helium3 import Button
+from helium3 import Point
+from helium3 import click
+from helium3 import doubleclick
+from helium3 import drag
+from helium3 import hover
+from helium3 import right_click
+from tests.api import BrowserAT
+from tests.api import test_browser_name
 
 
 class PointTest(BrowserAT):
@@ -72,19 +79,19 @@ class PointTest(BrowserAT):
         self.assert_result_is("Button 3 hovered at offset (3, 4).")
 
     def test_rightclick_top_left(self):
-        rightclick(Button("Button 1").top_left)
+        right_click(Button("Button 1").top_left)
         self.assert_result_is(
             "Button 1 rightclicked at offset (0, 0).", offset_delta=(1, 1)
         )
 
     def test_rightclick_point(self):
-        rightclick(Point(39, 13))
+        right_click(Point(39, 13))
         self.assert_result_is(
             "Button 1 rightclicked at offset (37, 10).", offset_delta=(0, 1)
         )
 
     def test_rightclick_top_left_offset(self):
-        rightclick(Button("Button 3").top_left + (3, 4))
+        right_click(Button("Button 3").top_left + (3, 4))
         self.assert_result_is("Button 3 rightclicked at offset (3, 4).")
 
     def test_doubleclick_top_left(self):

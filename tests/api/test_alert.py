@@ -1,15 +1,23 @@
 # -*- coding: utf-8 -*-
-from time import sleep, time
+from time import sleep
+from time import time
 from unittest import skipIf
 
 import selenium
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
-from helium3 import (ENTER, Alert, Config, TextField, click, press, wait_until,
-                     write)
-from helium3._impl import is_mac
-from helium3._impl.util.lang import TemporaryAttrValue
-from tests.api import BrowserAT, test_browser_name
+from helium3 import ENTER
+from helium3 import Alert
+from helium3 import Config
+from helium3 import TextField
+from helium3 import click
+from helium3 import press
+from helium3 import wait_until
+from helium3 import write
+from helium3.utils.lang import TemporaryAttrValue
+from helium3.utils.system import is_mac
+from tests.api import BrowserAT
+from tests.api import test_browser_name
 
 
 class AlertAT:

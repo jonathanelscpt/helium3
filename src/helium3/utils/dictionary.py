@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+
 def inverse(dictionary):
     """
     {a: {b}} -> {b: {a}}

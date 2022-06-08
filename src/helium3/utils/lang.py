@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+
 class TemporaryAttrValue:
     def __init__(self, obj, attr, value):
         self.obj = obj
@@ -15,7 +17,7 @@ class TemporaryAttrValue:
         self.value_before = None
 
 
-def isbound(method_or_fn):
+def is_bound(method_or_fn):
     try:
         return method_or_fn.__self__ is not None
     except AttributeError:  # Python 3

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from time import time
 
-from helium3 import Config, click
-from helium3._impl.util.lang import TemporaryAttrValue
+from helium3 import Config
+from helium3 import click
+from helium3.utils.lang import TemporaryAttrValue
 from tests.api import BrowserAT
 
 

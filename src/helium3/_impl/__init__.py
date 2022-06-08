@@ -2,32 +2,43 @@
 import atexit
 import re
 from copy import copy
-from inspect import getfullargspec, isfunction, ismethod
-from os import X_OK, access
-from os.path import dirname, join
-from time import sleep, time
+from inspect import getfullargspec
+from inspect import isfunction
+from inspect import ismethod
+from os import X_OK
+from os import access
+from os.path import dirname
+from os.path import join
+from time import sleep
+from time import time
 
-from selenium.common.exceptions import (ElementNotVisibleException,
-                                        MoveTargetOutOfBoundsException,
-                                        NoAlertPresentException,
-                                        NoSuchWindowException,
-                                        StaleElementReferenceException,
-                                        UnexpectedAlertPresentException,
-                                        WebDriverException)
-from selenium.webdriver import Chrome, ChromeOptions, Firefox, FirefoxOptions
+from selenium.common.exceptions import ElementNotVisibleException
+from selenium.common.exceptions import MoveTargetOutOfBoundsException
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import NoSuchWindowException
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import UnexpectedAlertPresentException
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver import Chrome
+from selenium.webdriver import ChromeOptions
+from selenium.webdriver import Firefox
+from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
 from helium3._impl.match_type import PREFIX_IGNORE_CASE
-from helium3._impl.selenium_wrappers import (FrameIterator,
-                                             FramesChangedWhileIterating,
-                                             WebDriverWrapper,
-                                             WebElementWrapper)
-from helium3._impl.util.dictionary import inverse
-from helium3._impl.util.os_ import make_executable
-from helium3._impl.util.system import get_canonical_os_name, is_mac, is_windows
-from helium3._impl.util.xpath import lower, predicate, predicate_or
+from helium3._impl.selenium_wrappers import FrameIterator
+from helium3._impl.selenium_wrappers import FramesChangedWhileIterating
+from helium3._impl.selenium_wrappers import WebDriverWrapper
+from helium3._impl.selenium_wrappers import WebElementWrapper
+from helium3.utils.dictionary import inverse
+from helium3.utils.os_ import make_executable
+from helium3.utils.system import get_canonical_os_name
+from helium3.utils.system import is_windows
+from helium3.utils.xpath import lower
+from helium3.utils.xpath import predicate
+from helium3.utils.xpath import predicate_or
 
 
 def might_spawn_window(f):
@@ -132,7 +143,8 @@ class APIImpl:
         atexit.register(self._kill_service, result.service)
         return result
 
-    def _get_chrome_options(self, headless, maximize, options):
+    @staticmethod
+    def _get_chrome_options(headless, maximize, options):
         result = ChromeOptions() if options is None else options
         # Prevent Chrome's debug logs from appearing in our console window:
         result.add_experimental_option("excludeSwitches", ["enable-logging"])
@@ -142,7 +154,8 @@ class APIImpl:
             result.add_argument("--start-maximized")
         return result
 
-    def _use_included_web_driver(self, driver_name):
+    @staticmethod
+    def _use_included_web_driver(driver_name):
         if is_windows():
             driver_name += ".exe"
         driver_path = join(
@@ -157,7 +170,8 @@ class APIImpl:
                 ) from None
         return driver_path
 
-    def _kill_service(self, service):
+    @staticmethod
+    def _kill_service(service):
         old = service.send_remote_shutdown_command
         service.send_remote_shutdown_command = lambda: None
         try:
@@ -287,7 +301,8 @@ class APIImpl:
         self._manipulate(element, lambda wew: action(wew.unwrap(), offset))
 
     def _unwrap_clickable_element(self, elt):
-        from helium3 import HTMLElement, Point
+        from helium3 import HTMLElement
+        from helium3 import Point
 
         offset = None
         if isinstance(elt, str):
@@ -439,7 +454,8 @@ class APIImpl:
     @handle_unexpected_alert
     def highlight_impl(self, element):
         driver = self.require_driver()
-        from helium3 import HTMLElement, Text
+        from helium3 import HTMLElement
+        from helium3 import Text
 
         if isinstance(element, str):
             element = Text(element)
@@ -1184,7 +1200,7 @@ class LabelledElement(HTMLElementImpl):
             if elts:
                 # Would like to use a set literal {...} here, but this is not
                 # supported in Python 2.6. Thus we need to use set([...]).
-                pivots_to_elts[pivot] = set([self._find_closest(pivot, elts)])
+                pivots_to_elts[pivot] = {self._find_closest(pivot, elts)}
 
     def _find_closest(self, to_pivot, among_elts):
         remaining_elts = iter(among_elts)
@@ -1447,7 +1463,7 @@ class WindowImpl(GUIElementImpl):
         def __enter__(self):
             try:
                 self._window_handle_before = self.driver.current_window_handle
-            except NoSuchWindowException as window_closed:
+            except NoSuchWindowException:
                 do_switch = True
             else:
                 do_switch = self._window_handle_before != self.handle
@@ -1489,6 +1505,7 @@ class AlertImpl(GUIElementImpl):
             # https://code.google.com/p/selenium/issues/detail?id=3544
             msg = e.msg
             if msg and re.match(
+                # todo
                 r"a\.document\.getElementsByTagName\([^\)]*\)\[0\] is " r"undefined",
                 msg,
             ):

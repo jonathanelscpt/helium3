@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-from helium3 import Button, Config, Text, highlight
-from helium3._impl.util.lang import TemporaryAttrValue
+from helium3 import Button
+from helium3 import Config
+from helium3 import Text
+from helium3 import highlight
+from helium3.utils.lang import TemporaryAttrValue
 from tests.api import BrowserAT
 
 

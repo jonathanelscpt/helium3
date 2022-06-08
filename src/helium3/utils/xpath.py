@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
+
+import string
+
+
 def lower(text):
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝ"
+    alphabet = f"{string.ascii_uppercase}ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝ"
     return "translate(%s, '%s', '%s')" % (text, alphabet, alphabet.lower())
 
 

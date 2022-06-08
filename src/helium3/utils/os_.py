@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from os import chmod, stat
+from os import chmod
+from os import stat
 from stat import S_IEXEC
 
 

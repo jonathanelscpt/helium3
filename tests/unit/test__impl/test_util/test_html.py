@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from unittest import TestCase
 
-from helium3._impl.util.html import (get_easily_readable_snippet,
-                                     normalize_whitespace)
+from helium3.utils.html import get_easily_readable_snippet
+from helium3.utils.html import normalize_whitespace
 
 
 class GetEasilyReadableSnippetTest(TestCase):

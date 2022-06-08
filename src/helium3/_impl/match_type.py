@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from helium3._impl.util.xpath import lower, replace_nbsp
+from helium3.utils.xpath import lower
+from helium3.utils.xpath import replace_nbsp
 
 
 class MatchType:
@@ -10,6 +11,7 @@ class MatchType:
         raise NotImplementedError()
 
 
+# todo
 class PREFIX_IGNORE_CASE(MatchType):
     def xpath(self, value, text):
         if not text:

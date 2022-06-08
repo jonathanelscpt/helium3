@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
-from helium3 import Config, hover
+from helium3 import Config
+from helium3 import hover
 from helium3._impl import is_windows
-from helium3._impl.util.lang import TemporaryAttrValue
+from helium3.utils.lang import TemporaryAttrValue
 from tests.api import BrowserAT
+
+try:
+    from win32api import SetCursorPos
+except ImportError as e:
+    if is_windows():
+        raise e
 
 
 class HoverTest(BrowserAT):
@@ -18,10 +25,9 @@ class HoverTest(BrowserAT):
 
     def _move_mouse_cursor_to_origin(self):
         if is_windows():
-            from win32api import SetCursorPos
-
             SetCursorPos((0, 0))
         # Feel free to add implementation for OSX/Linux here...
+        pass
 
     def test_hover_one(self):
         hover("Dropdown 1")

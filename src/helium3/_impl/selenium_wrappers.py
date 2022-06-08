@@ -2,12 +2,14 @@
 import sys
 from urllib.error import URLError
 
-from selenium.common.exceptions import (NoSuchFrameException,
-                                        StaleElementReferenceException,
-                                        WebDriverException)
+from selenium.common.exceptions import NoSuchFrameException
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.action_chains import ActionChains
 
-from helium3._impl.util.geom import Rectangle
+from helium3.utils.geom import Rectangle
+
+CONNECTION_REFUSED = 10061
 
 
 class Wrapper:
@@ -27,7 +29,7 @@ class Wrapper:
         return self.target == other.target
 
     def __ne__(self, other):
-        return not self == other
+        return self != other
 
 
 class WebDriverWrapper(Wrapper):
@@ -93,7 +95,6 @@ def _translate_url_errors_caused_by_server_shutdown(f):
 
 def _is_caused_by_server_shutdown(url_error):
     try:
-        CONNECTION_REFUSED = 10061
         return url_error.args[0][0] == CONNECTION_REFUSED
     except (IndexError, TypeError):
         return False

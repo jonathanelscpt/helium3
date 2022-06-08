@@ -43,7 +43,7 @@ class NoDriverTest(TestCase):
         self._check_requires_driver(lambda: hover("Hi there!"))
 
     def test_rightclick_requires_driver(self):
-        self._check_requires_driver(lambda: rightclick("Hi there!"))
+        self._check_requires_driver(lambda: right_click("Hi there!"))
 
     def test_select_requires_driver(self):
         self._check_requires_driver(lambda: select("Language", "English"))

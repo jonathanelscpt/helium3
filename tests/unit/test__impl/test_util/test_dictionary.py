@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from unittest import TestCase
 
-from helium3._impl.util.dictionary import inverse
+from helium3.utils.dictionary import inverse
 
 
 class InverseTest(TestCase):
